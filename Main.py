@@ -13,16 +13,17 @@ class Main():
     def revalue(self):
         f = open("data/feed.txt", "r")
         for sym in f.readlines():
-            data, meta_data = self.ts.get_intraday(symbol=sym, interval="60min")
+            data, meta_data = self.ts.get_monthly(symbol=sym)
+            print(data)
             data_list = []
             for intra in data:
                 data_list.append(data[intra])
-            print(data_list)
-            gain = float(data_list[0]["4. close"]) / float(data_list[-1]["4. close"])
+            gain = float(data_list[0]["4. close"]) / float(data_list[-1]["4. close"]) -1
             print(gain)
-            if gain >= 1.15:
+            if gain >= 0.15:
                 print("hit: " + sym)
-                self.index.update({"sym": gain})
+                self.index.update({sym: gain})
+        print(self.index)
         f.close()
 
 Main()
