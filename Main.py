@@ -1,4 +1,4 @@
-import tools.constants
+import tools.constants, time
 from alpha_vantage.timeseries import TimeSeries
 
 class Main():
@@ -11,26 +11,32 @@ class Main():
         self.revalue()
 
     def revalue(self):
-        f = open("data/feed.txt", "r")
+
+        f = open("data/msciworld.txt", "r")
+
         for sym in f.readlines():
-            data, meta_data = self.ts.get_monthly(symbol=sym)
+            try:
+                # Gibt 2 Datenpunkte aus: Heute und letzter Tag des letzen Monats
+                # meat_data ist irrelevant, z.B Zeitzone etc.
+                data, meta_data = self.ts.get_monthly(symbol=sym)
+            # API erlaubt nur 5 Anfragen pro Minute
+            except ValueError:
+                time.sleep(60)
             print(data)
+
+            # Dicitonary in Liste umwandeln
             data_list = []
-            for intra in data:
-                data_list.append(data[intra])
+            for intra in data: data_list.append(data[intra])
+
+            # Monatszuwachs berechnen
             gain = float(data_list[0]["4. close"]) / float(data_list[-1]["4. close"]) -1
             print(gain)
+
             if gain >= 0.15:
                 print("hit: " + sym)
                 self.index.update({sym: gain})
+
         print(self.index)
         f.close()
 
 Main()
-
-
-# Fonds 1: Niedriegen KGV (ca. unter 20)
-# KGV = Kurs Aktie/Gewinn Aktie
-
-# Fonds 2: Wachstum
-# Monatsanstieg überdurchschnittlich (ca. 15%)

@@ -4,8 +4,8 @@ f = open("../data/msciworld.txt", "r")
 new = ""
 for line in f.readlines():
     # nur die ersten 6 zeichen sind relevant
-    line = line[-13:]
-    new += line
+    if line != "r Derivate	-\n":
+        new += line
 
 
 f.close()
