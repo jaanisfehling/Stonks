@@ -1,16 +1,15 @@
 import re
 
-f = open("../data/msciworld.txt", "r")
+f = open("../data/s&p500.txt", "r")
 new = ""
 for line in f.readlines():
-    # nur die ersten 6 zeichen sind relevant
-    line = line[-13:]
-    new += line
+    line = line.split(" ")[0]
+    new += line + "\n"
 
 
 f.close()
 
-f = open("../data/msciworld.txt", "w")
+f = open("../data/s&p500.txt", "w")
 f.truncate()
 f.writelines(new)
 f.close()
