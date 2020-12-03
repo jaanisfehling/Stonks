@@ -1,4 +1,4 @@
-import tools.constants, time
+import tools.constants, tools.DateHelper, time
 from alpha_vantage.timeseries import TimeSeries
 
 class Main():
@@ -23,16 +23,18 @@ class Main():
             except ValueError:
                 time.sleep(60)
 
-            # Dicitonary in Liste umwandeln
-            data_list = []
-            for intra in data: data_list.append(data[intra])
+            # Daten von min. einem Monat früher
+            old_date = tools.DateHelper.oneMonthEarlier(list(data.keys())[0])
+            # Falls Tag in Daten nicht existiert
+            if old_date not in data.keys():
+                old_date = tools.DateHelper.oneDayEarlier(old_date)
 
             print(data)
-            print(data_list[0])
-            print(data_list[29], "\n")
+            print(list(data.keys())[0])
+            print(data[old_date], "\n")
 
             # Monatszuwachs berechnen (in %)
-            gain = (float(data_list[0]["4. close"]) / float(data_list[29]["4. close"]) -1) *100
+            gain = (float(list(data.values())[0]["4. close"]) / float(data[old_date]["4. close"]) -1) *100
             print(sym + " " + str(gain) + "%")
 
             if gain >= 15:
