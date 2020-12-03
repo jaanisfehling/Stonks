@@ -3,4 +3,4 @@ Monatsanstieg überdurchschnittlich (min. 15%)
 
 Fonds 2: Underweight
 Niedriger KGV (ca. unter 20)
-KGV = Kurs Aktie/Gewinn Aktie
+KGV = Kurs Aktie/Gewinn pro Aktie
