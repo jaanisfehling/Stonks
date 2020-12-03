@@ -17,7 +17,7 @@ class Main():
             try:
                 # Gibt 2 Datenpunkte aus: Heute und letzter Tag des letzen Monats
                 # meat_data ist irrelevant, z.B Zeitzone etc.
-                data, meta_data = self.ts.get_daily(symbol=sym, outputsize="compact")
+                data, meta_data = self.ts.get_daily_adjusted(symbol=sym, outputsize="compact")
 
             # API erlaubt nur 5 Anfragen pro Minute
             except ValueError:
@@ -26,21 +26,24 @@ class Main():
             # Daten von min. einem Monat früher
             old_date = tools.DateHelper.oneMonthEarlier(list(data.keys())[0])
             # Falls Tag in Daten nicht existiert
-            if old_date not in data.keys():
+            while old_date not in data.keys():
                 old_date = tools.DateHelper.oneDayEarlier(old_date)
 
             print(data)
-            print(list(data.keys())[0])
-            print(data[old_date], "\n")
+            print(list(data.keys())[0], list(data.values())[0])
+            print(list(data.keys())[list(data.values()).index(data[old_date])], data[old_date], "\n")
 
             # Monatszuwachs berechnen (in %)
-            gain = (float(list(data.values())[0]["4. close"]) / float(data[old_date]["4. close"]) -1) *100
+            gain = (float(list(data.values())[0]["5. adjusted close"]) / float(data[old_date]["5. adjusted close"]) -1) *100
             print(sym + " " + str(gain) + "%")
 
             if gain >= 15:
                 self.index.update({sym: gain})
 
+        f.close()
         print(self.index)
+        f = open("data/index.txt", "w")
+        f.write(str(self.index))
         f.close()
 
 Main()
