@@ -29,7 +29,7 @@ class Main():
             gain = (data[-1]["close"] / data[0]["close"] -1)*100
 
             # Prozentanzeige
-            sys.stdout.write("\r" + str(round((counter/total)*100, 1)) + "% | " + sym + " | " + str(data[0]["date"]) + ": " + str(data[0]["close"]) + " | " + str(data[-1]["date"]) + ": " + str(data[-1]["close"]) + " | " + str(gain) + "%")
+            sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | " + str(data[0]["date"]) + ": " + str(data[0]["close"]) + " | " + str(data[-1]["date"]) + ": " + str(data[-1]["close"]) + " | " + str(gain) + "%")
 
             # Falls über 15% Monatszuwachs
             if gain >= 15:
