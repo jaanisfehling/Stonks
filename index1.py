@@ -1,7 +1,7 @@
 import tools.constants, tools.dateHelper, time, sys
 import pyEX
 
-class Main():
+class index1():
 
     def __init__(self):
         self.index = {}
@@ -36,10 +36,10 @@ class Main():
                 self.index.update({sym: gain})
 
         f.close()
-        print("Index:\n")
+        print("Index 1:\n")
         for i in self.index: print(i)
-        f = open("data/index.txt", "w")
+        f = open("data/index1.txt", "w")
         f.write(str(self.index))
         f.close()
 
-Main()
+index1()

@@ -1,7 +1,7 @@
 import tools.constants, tools.dateHelper, time, sys
 import pyEX
 
-class Main():
+class index2():
 
     def __init__(self):
         self.index = {}
@@ -23,23 +23,31 @@ class Main():
             counter += 1
             sym = sym.rstrip()
 
-            data = self.c.chart(sym)
+            earnings = self.c.earnings(sym)
+            price = self.c.price(sym)
 
-            # Monatszuwachs berechnen (in %)
-            gain = (data[-1]["close"] / data[0]["close"] -1)*100
+            try:
+                # KGV
+                kgv = price / earnings["earnings"][0]["actualEPS"]
 
-            # Prozentanzeige
-            sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | " + str(data[0]["date"]) + ": " + str(data[0]["close"]) + " | " + str(data[-1]["date"]) + ": " + str(data[-1]["close"]) + " | " + str(gain) + "%")
+                # Prozentanzeige
+                sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | " + str(kgv))
 
-            # Falls über 15% Monatszuwachs
-            if gain >= 15:
-                self.index.update({sym: gain})
+            # Keine Daten verfügbar
+            except KeyError:
+                sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | No Data available.")
+
+            else:
+                # Falls KGV unter 20
+                if kgv < 20:
+                    self.index.update({sym: kgv})
+
 
         f.close()
-        print("Index:\n")
+        print("Index 2:\n")
         for i in self.index: print(i)
-        f = open("data/index.txt", "w")
+        f = open("data/index2.txt", "w")
         f.write(str(self.index))
         f.close()
 
-Main()
+index2()
