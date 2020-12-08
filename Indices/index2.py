@@ -1,4 +1,4 @@
-import tools.constants, tools.dateHelper, time, sys
+import tools.constants, time, sys
 import pyEX
 
 class index2():
@@ -13,10 +13,10 @@ class index2():
 
     def revalue(self):
         # Prozentanzeige
-        f = open("data/iex.txt", "r")
+        f = open("./data/test.txt", "r")
         total = len(f.readlines())
         f.close()
-        f = open("data/iex.txt", "r")
+        f = open("./data/test.txt", "r")
         counter = 0
 
         for sym in f.readlines():
@@ -40,13 +40,25 @@ class index2():
             else:
                 # Falls KGV unter 20
                 if kgv < 20:
-                    self.index.update({sym: kgv})
-
+                    self.index.update({sym: 0})
 
         f.close()
-        print("Index 2:\n")
+
+        total_marketcap = 0
+        for sym in self.index.keys():
+            stats = self.c.keyStats(sym)
+            marketcap = stats["marketcap"]
+            total_marketcap += marketcap
+
+        for sym in self.index.keys():
+            stats = self.c.keyStats(sym)
+            marketcap = stats["marketcap"]
+            weight = marketcap / total_marketcap
+            self.index[sym] = weight
+
+        print("\nIndex 2:\n")
         for i in self.index: print(i)
-        f = open("data/index2.txt", "w")
+        f = open("./data/index2.txt", "w")
         f.write(str(self.index))
         f.close()
 
