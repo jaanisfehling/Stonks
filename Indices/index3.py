@@ -4,7 +4,7 @@ import pyEX
 class index2():
 
     def __init__(self):
-        self.index = {}
+        self.index = []
         self.index_lenght = 25
         self.publishable = tools.constants.iex_publishable
         self.secret = tools.constants.iex_secret
@@ -13,10 +13,10 @@ class index2():
 
     def revalue(self):
         # Prozentanzeige
-        f = open("./data/test.txt", "r")
+        f = open("../data/test.txt", "r")
         total = len(f.readlines())
         f.close()
-        f = open("./data/test.txt", "r")
+        f = open("../data/test.txt", "r")
         counter = 0
 
         for sym in f.readlines():
@@ -40,25 +40,12 @@ class index2():
             else:
                 # Falls möglicher Zuwachs über 25% ist
                 if gain > 0.25:
-                    self.index.update({sym: 0})
-
+                    self.index.append(sym)
         f.close()
-
-        total_marketcap = 0
-        for sym in self.index.keys():
-            stats = self.c.keyStats(sym)
-            marketcap = stats["marketcap"]
-            total_marketcap += marketcap
-
-        for sym in self.index.keys():
-            stats = self.c.keyStats(sym)
-            marketcap = stats["marketcap"]
-            weight = marketcap / total_marketcap
-            self.index[sym] = weight
 
         print("\nIndex 3:\n")
         for i in self.index: print(i)
-        f = open("./data/index3.txt", "w")
+        f = open("../data/index3.txt", "w")
         f.write(str(self.index))
         f.close()
 
