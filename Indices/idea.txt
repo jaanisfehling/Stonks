@@ -9,4 +9,4 @@ Index 3: Underweight
 min. 5 Analysten
 Preisziel 25% über aktuellem Kurs
 
-Alle Indizes sind kapitalisierungsgewichtete Performanceindizes
+Alle Indizes sind preisgewichtete Performanceindizes
