@@ -17,23 +17,20 @@ counter = 0
 
 for sym in f.readlines():
     counter += 1
+    # \n entfernen
     sym = sym.rstrip()
-
-    # Daten fetchen
-    data = c.keyStats(sym)
 
     # Falls Fehler in Daten auftreten bzw. Daten nicht vorhanden sind
     try:
-        # Monatszuwachs (in %)
-        gain = data["month1ChangePercent"]*100
-        # KGV
-        kgv = data["peRatio"]
+        # Daten fetchen
+        gain = c.keyStats(sym, "month1ChangePercent")
+        kgv = c.keyStats(sym, "peRatio")
 
         # Prozentanzeige
         sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | " + str(round(gain, 2)) + "% | " + str(kgv))
 
     # Keine Daten verfügbar
-    except KeyError:
+    except pyEX.common.PyEXception:
         sys.stdout.write("\r" + str(round((counter/total)*100, 2)) + "% | " + sym + " | No Data available.")
 
     else:
