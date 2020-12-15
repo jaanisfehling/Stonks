@@ -7,9 +7,9 @@ secret = tools.constants.iex_secret
 c = pyEX.Client(api_token=secret, version="sandbox")
 f = open("../data/index1.txt", "r")
 index = eval(f.readline())
-data = c.chart(index[0])
-dates = [0] * len(data)
-values = [0.0] * len(data)
+lenght = len(c.chart(index[0]))
+dates = [0] * lenght
+values = [0.0] * lenght
 
 # Alle Aktien im Index
 for sym in index:

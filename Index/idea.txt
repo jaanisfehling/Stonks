@@ -1,8 +1,8 @@
 Index 1: Buy High Sell Higher
-Monatsanstieg überdurchschnittlich (min. 15%)
+Aktien mit dem höchsten Monatsanstieg
 
 Index 2: Potential
-Niedriger KGV (ca. unter 20)
+möglichst niedriger KGV, aber kgv > 0
 KGV = Kurs Aktie/Gewinn pro Aktie
 
 Index 3: Underweight

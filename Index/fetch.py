@@ -1,9 +1,6 @@
 import tools.constants, sys, pyEX
 
-filtered = []
-index1 = []
-index2 = []
-index_lenght = 10
+fetched = []
 publishable = tools.constants.iex_publishable
 secret = tools.constants.iex_secret
 c = pyEX.Client(api_token=secret, version="sandbox")
@@ -15,6 +12,7 @@ f.close()
 f = open("../data/test.txt", "r")
 counter = 0
 
+# Alle Aktien iterieren
 for sym in f.readlines():
     counter += 1
     # \n entfernen
@@ -35,29 +33,9 @@ for sym in f.readlines():
 
     else:
         # Daten in Liste speichern
-        filtered.append([sym, gain, kgv])
+        fetched.append([sym, gain, kgv])
 
 f.close()
-
-# Nach Monatszuwachs sortieren
-filtered.sort(key=lambda x: x[1], reverse=True)
-index1 = [filtered[i][0] for i in range(index_lenght)]
-
-# Nach KGV sortieren
-filtered.sort(key=lambda x: x[2])
-i = 0
-while i < index_lenght:
-    if filtered[i][2] > 0:
-        index2.append(filtered[i][0])
-        i += 1
-
-print("\nIndex 1:\n")
-for i in index1: print(i)
-print("\nIndex 2:\n")
-for i in index2: print(i)
-
-f = open("../data/index1.txt", "w")
-f.write(str(index1))
-f = open("../data/index2.txt", "w")
-f.write(str(index2))
+f = open("../data/fetched.txt", "w")
+f.write(str(fetched))
 f.close()
