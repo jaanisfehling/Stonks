@@ -50,7 +50,7 @@ index1 = [filtered[i][0] for i in range(index_lenght)]
 filtered.sort(key=lambda x: x[2])
 i = 0
 while i < index_lenght:
-    if filtered[i][2] != 0:
+    if filtered[i][2] > 0:
         index2.append(filtered[i][0])
         i += 1
 
