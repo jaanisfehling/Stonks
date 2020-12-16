@@ -3,13 +3,13 @@ import tools.constants, sys, pyEX
 fetched = []
 publishable = tools.constants.iex_publishable
 secret = tools.constants.iex_secret
-c = pyEX.Client(api_token=secret, version="sandbox")
+c = pyEX.Client(api_token=secret)
 
 # Prozentanzeige
-f = open("../data/test.txt", "r")
+f = open("../data/iex.txt", "r")
 total = len(f.readlines())
 f.close()
-f = open("../data/test.txt", "r")
+f = open("../data/iex.txt", "r")
 counter = 0
 
 # Alle Aktien iterieren
