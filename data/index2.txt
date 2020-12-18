@@ -1,1 +1,1 @@
-['A']
+['PTR', 'BCH', 'CHL', 'MUFG', 'NWG', 'CS', 'QD', 'ENIA', 'ACOR', 'UL', 'UIS', 'ITUB', 'BTI', 'VHC', 'SNP', 'FLY', 'TNK', 'SAP', 'VCTR', 'ABEV', 'NRG', 'FRO', 'MMAC', 'DXYN', 'INFY']

@@ -1,6 +1,6 @@
 index1 = []
 index2 = []
-index_lenght = 1
+index_lenght = 25
 f = open("../data/fetched.txt", "r")
 fetched = eval(f.readline())
 f.close()

@@ -1,1 +1,1 @@
-['AAL']
+['CRIS', 'FTEK', 'VERU', 'HPR', 'FCEL', 'GSM', 'SM', 'LXRX', 'TUSK', 'RIG', 'MVIS', 'PEI', 'QEP', 'CDEV', 'EDIT', 'LEU', 'CAAS', 'CPE', 'VERI', 'SLCA', 'ENG', 'JAGX', 'BTU', 'NBR', 'BCRX']
