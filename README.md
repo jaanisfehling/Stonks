@@ -1,2 +1,2 @@
 # Stonks
-Stonks only go up brrrrrrr
+Calculate your own Index based on properties like Growth or Price Earnings Ratio
